@@ -1,3 +1,13 @@
-# flutter_shopping_app
+# Flutter Clean Architecture
 
-A new Flutter project.
+A shopping application developed with Clean Architecture 
+
+## Features
+---
+- Get products
+- Search product
+- Filter product by category
+- Display product details
+
+
+_status: WIP_ <br/>
