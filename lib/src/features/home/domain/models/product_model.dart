@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'category_model.dart';
+import 'rating_model.dart';
 
 part 'product_model.g.dart';
 
@@ -7,22 +7,17 @@ part 'product_model.g.dart';
 class ProductModel {
   int? id;
   String? title;
-  int? price;
+  double? price;
   String? description;
   List<String>? images;
-  DateTime? creationAt;
-  DateTime? updatedAt;
-  CategoryModel? category;
-  ProductModel({
-    this.id,
-    this.title,
-    this.price,
-    this.description,
-    this.images,
-    this.creationAt,
-    this.updatedAt,
-    this.category,
-  });
+  RatingModel? rating;
+  ProductModel(
+      {this.id,
+      this.title,
+      this.price,
+      this.description,
+      this.images,
+      this.rating});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);

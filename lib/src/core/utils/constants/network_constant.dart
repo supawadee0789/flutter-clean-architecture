@@ -1,7 +1,7 @@
 class AppApi {
-  static const String productApiUrl = 'https://api.escuelajs.co';
+  static const String productApiUrl = 'https://fakestoreapi.com';
 
   static String getProductPath() {
-    return '/api/v1/products';
+    return '/products';
   }
 }
