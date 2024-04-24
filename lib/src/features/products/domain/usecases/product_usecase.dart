@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_shopping_app/src/core/network/error/failures.dart';
 import 'package:flutter_shopping_app/src/core/utils/usecases/usecase.dart';
-import 'package:flutter_shopping_app/src/features/home/domain/models/product_model.dart';
-import 'package:flutter_shopping_app/src/features/home/domain/repositories/abstract_products_repository.dart';
+import 'package:flutter_shopping_app/src/features/products/domain/models/product_model.dart';
+import 'package:flutter_shopping_app/src/features/products/domain/repositories/abstract_products_repository.dart';
 
 class ProductUseCase extends UseCase<List<ProductModel>, NoParams> {
   final AbstractProductRepository repository;

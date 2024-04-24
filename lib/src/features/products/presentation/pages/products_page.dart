@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_shopping_app/src/core/utils/injections.dart';
-import 'package:flutter_shopping_app/src/features/home/domain/usecases/product_usecase.dart';
-import 'package:flutter_shopping_app/src/features/home/presentation/bloc/home_bloc.dart';
+import 'package:flutter_shopping_app/src/features/products/domain/usecases/product_usecase.dart';
+import 'package:flutter_shopping_app/src/features/products/presentation/bloc/products_bloc.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ProductsPage extends StatefulWidget {
+  const ProductsPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ProductsPage> createState() => _ProductsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final HomeBloc _bloc = HomeBloc(productUseCase: sl<ProductUseCase>());
+class _ProductsPageState extends State<ProductsPage> {
+  final ProductsBloc _bloc = ProductsBloc(productUseCase: sl<ProductUseCase>());
 
   @override
   void initState() {
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<HomeBloc, HomeState>(
+      body: BlocBuilder<ProductsBloc, ProductsState>(
         bloc: _bloc,
         builder: (context, state) {
           if (state is SuccessGetProductsState) {
