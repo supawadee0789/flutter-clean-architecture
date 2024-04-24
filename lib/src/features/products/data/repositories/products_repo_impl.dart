@@ -21,4 +21,16 @@ class ProductRepositoryImpl extends AbstractProductRepository {
       return Left(CancelTokenFailure(e.message, e.statusCode));
     }
   }
+
+  @override
+  Future<Either<Failure, List<String>>> getCategories() async {
+    try {
+      final result = await productApi.getCategories();
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message, e.statusCode));
+    } on CancelTokenException catch (e) {
+      return Left(CancelTokenFailure(e.message, e.statusCode));
+    }
+  }
 }

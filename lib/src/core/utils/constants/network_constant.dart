@@ -4,4 +4,8 @@ class AppApi {
   static String getProductPath() {
     return '/products';
   }
+
+  static String getCategoriesPath() {
+    return '/categories';
+  }
 }

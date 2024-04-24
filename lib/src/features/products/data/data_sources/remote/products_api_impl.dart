@@ -30,4 +30,25 @@ class ProductImplApi extends AbstractProductApi {
       throw ServerException(e.toString(), null);
     }
   }
+
+  @override
+  Future<List<String>> getCategories() async {
+    try {
+      final result = await dio.get(AppApi.getProductPath());
+      if (result.data == null) {
+        throw ServerException("Unknown Error", result.statusCode);
+      }
+      return result.data;
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.cancel) {
+        throw CancelTokenException(handleDioError(e), e.response?.statusCode);
+      } else {
+        throw ServerException(handleDioError(e), e.response?.statusCode);
+      }
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw ServerException(e.toString(), null);
+    }
+  }
 }
