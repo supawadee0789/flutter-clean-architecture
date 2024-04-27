@@ -4,7 +4,7 @@ import 'package:flutter_shopping_app/src/core/styles/theme_extension.dart';
 
 class Categories extends StatefulWidget {
   final List<String> categories;
-  final void Function(int index) onTap;
+  final void Function(int? index) onTap;
   const Categories({super.key, required this.categories, required this.onTap});
   @override
   State<Categories> createState() => _CategoriesState();
@@ -15,8 +15,8 @@ class _CategoriesState extends State<Categories> {
 
   void setSelectedItem(int index) {
     setState(() {
-      selectedItem = index;
-      widget.onTap(index);
+      selectedItem = selectedItem == index ? null : index;
+      widget.onTap(selectedItem);
     });
   }
 
