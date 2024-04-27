@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shopping_app/src/core/styles/theme_extension.dart';
 import 'package:flutter_shopping_app/src/features/products/domain/models/product_model.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductsWidget extends StatelessWidget {
   final List<ProductModel> products;
@@ -17,10 +18,13 @@ class ProductsWidget extends StatelessWidget {
         crossAxisCount: 2,
         childAspectRatio: 3.7 / 5,
         children: products.map((p) {
-          return ProductItem(
-            name: p.title!,
-            image: p.image,
-            price: p.price!,
+          return GestureDetector(
+            onTap: () => context.go("/details", extra: p),
+            child: ProductItem(
+              name: p.title!,
+              image: p.image,
+              price: p.price!,
+            ),
           );
         }).toList());
   }
