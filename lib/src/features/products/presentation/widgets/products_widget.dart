@@ -61,15 +61,15 @@ class ProductItem extends StatelessWidget {
                 name,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.start,
-                style: context.textTheme.labelLarge!
-                    .copyWith(fontWeight: FontWeight.w900),
+                style: context.textTheme.labelLarge,
               ),
             ),
             Container(
               padding: EdgeInsets.only(top: 5.h),
               alignment: Alignment.bottomRight,
               child: Text('\$ ${price.toStringAsFixed(2)}',
-                  style: context.textTheme.titleLarge),
+                  style: context.textTheme.titleLarge!
+                      .copyWith(fontWeight: FontWeight.w900)),
             ),
           ],
         ),
