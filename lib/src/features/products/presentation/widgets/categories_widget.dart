@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_shopping_app/src/core/styles/theme_extension.dart';
 
 class Categories extends StatefulWidget {
   final List<String> categories;
@@ -48,9 +49,8 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getColor(bool isPrimary) => (Set<MaterialState> states) => isPrimary
-        ? Theme.of(context).colorScheme.primary
-        : Theme.of(context).colorScheme.onPrimary;
+    getColor(bool isPrimary) => (Set<MaterialState> states) =>
+        isPrimary ? context.colorScheme.primary : context.colorScheme.onPrimary;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 4.0.w),
