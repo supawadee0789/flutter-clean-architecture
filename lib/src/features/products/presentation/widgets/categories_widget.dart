@@ -48,20 +48,18 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color getForegroundColor(Set<MaterialState> states) =>
-        isSelected ? Colors.white : Colors.black;
-    Color getBackgroundColor(Set<MaterialState> states) => isSelected
-        ? Theme.of(context).primaryColor
-        : Theme.of(context).scaffoldBackgroundColor;
+    getColor(bool isPrimary) => (Set<MaterialState> states) => isPrimary
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).colorScheme.onPrimary;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 4.0.w),
       child: OutlinedButton(
         style: ButtonStyle(
           foregroundColor:
-              MaterialStateProperty.resolveWith(getForegroundColor),
+              MaterialStateProperty.resolveWith(getColor(!isSelected)),
           backgroundColor:
-              MaterialStateProperty.resolveWith(getBackgroundColor),
+              MaterialStateProperty.resolveWith(getColor(isSelected)),
         ),
         onPressed: onTap,
         child: Text(name.toUpperCase()),
