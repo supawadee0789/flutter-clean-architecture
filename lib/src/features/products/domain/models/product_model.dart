@@ -9,14 +9,14 @@ class ProductModel {
   String? title;
   double? price;
   String? description;
-  List<String>? images;
+  String? image;
   RatingModel? rating;
   ProductModel(
       {this.id,
       this.title,
       this.price,
       this.description,
-      this.images,
+      this.image,
       this.rating});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
