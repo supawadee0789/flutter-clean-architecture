@@ -6,6 +6,6 @@ class AppApi {
   }
 
   static String getCategoriesPath() {
-    return '/categories';
+    return '/products/categories';
   }
 }

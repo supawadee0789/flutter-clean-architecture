@@ -34,11 +34,11 @@ class ProductImplApi extends AbstractProductApi {
   @override
   Future<List<String>> getCategories() async {
     try {
-      final result = await dio.get(AppApi.getProductPath());
+      final result = await dio.get(AppApi.getCategoriesPath());
       if (result.data == null) {
         throw ServerException("Unknown Error", result.statusCode);
       }
-      return result.data;
+      return (result.data as List<dynamic>).map((e) => e.toString()).toList();
     } on DioException catch (e) {
       if (e.type == DioExceptionType.cancel) {
         throw CancelTokenException(handleDioError(e), e.response?.statusCode);

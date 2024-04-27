@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'src/core/router/router.dart';
 import 'src/core/utils/injections.dart';
@@ -16,8 +17,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: router,
+    return ScreenUtilInit(
+      designSize: const Size(390, 844), // Iphone 14 dimension
+      child: MaterialApp.router(
+        routerConfig: router,
+      ),
     );
   }
 }
