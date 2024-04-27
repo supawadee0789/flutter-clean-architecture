@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shopping_app/src/core/utils/injections.dart';
@@ -43,12 +42,15 @@ class _ProductsPageState extends State<ProductsPage> {
         children: [
           // Categories section
           SizedBox(
-            height: 0.1.sh,
+            height: 0.065.sh,
             child: BlocBuilder<CategoryBloc, CategoryState>(
               bloc: _categoryBloc,
               builder: (context, state) {
                 if (state is SuccessGetCategoriesState) {
-                  return Categories(categories: state.categories);
+                  return Categories(
+                    categories: state.categories,
+                    onTap: (index) => print(index),
+                  );
                 }
                 return const SizedBox();
               },
