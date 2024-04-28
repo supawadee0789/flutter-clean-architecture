@@ -8,6 +8,7 @@ import 'package:flutter_shopping_app/src/features/products/presentation/bloc/cat
 import 'package:flutter_shopping_app/src/features/products/presentation/bloc/products_bloc.dart';
 import 'package:flutter_shopping_app/src/features/products/presentation/widgets/categories_widget.dart';
 import 'package:flutter_shopping_app/src/features/products/presentation/widgets/products_widget.dart';
+import 'package:flutter_shopping_app/src/features/products/presentation/widgets/search_widget.dart';
 import 'package:flutter_shopping_app/src/shared/widgets/loading_widget.dart';
 import 'package:flutter_shopping_app/src/shared/widgets/refresh_widget.dart';
 
@@ -56,10 +57,12 @@ class _ProductsPageState extends State<ProductsPage> {
               },
             ),
           ),
+          // Search sections
+          const SearchWidget(),
 
           // Products sections
           SizedBox(
-            height: 0.75.sh,
+            height: 0.74.sh,
             child: BlocBuilder<ProductsBloc, ProductsState>(
               bloc: _productBloc,
               builder: (context, state) {
