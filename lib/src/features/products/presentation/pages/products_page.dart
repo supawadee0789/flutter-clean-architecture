@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shopping_app/src/core/utils/injections.dart';
 import 'package:flutter_shopping_app/src/features/products/domain/usecases/category_usecase.dart';
+import 'package:flutter_shopping_app/src/features/products/domain/usecases/filter_by_category_usecase.dart';
 import 'package:flutter_shopping_app/src/features/products/domain/usecases/product_usecase.dart';
 import 'package:flutter_shopping_app/src/features/products/presentation/bloc/category_bloc.dart';
 import 'package:flutter_shopping_app/src/features/products/presentation/bloc/products_bloc.dart';
@@ -20,8 +21,9 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
-  final ProductsBloc _productBloc =
-      ProductsBloc(productUseCase: sl<ProductUseCase>());
+  final ProductsBloc _productBloc = ProductsBloc(
+      productUseCase: sl<ProductUseCase>(),
+      filterByCategoryUseCase: sl<FilterByCategoryUseCase>());
   final CategoryBloc _categoryBloc =
       CategoryBloc(categoryUseCase: sl<CategoryUseCase>());
 
@@ -50,7 +52,9 @@ class _ProductsPageState extends State<ProductsPage> {
                 if (state is SuccessGetCategoriesState) {
                   return Categories(
                     categories: state.categories,
-                    onTap: (index) => print(index),
+                    onTap: (index) => index != null
+                        ? callFilterByCategory(state.categories[index])
+                        : callProducts(),
                   );
                 }
                 return const SizedBox();
@@ -99,5 +103,11 @@ class _ProductsPageState extends State<ProductsPage> {
   // Get categories
   callCategories({bool withLoading = true}) {
     _categoryBloc.add(OnGettingCategoryEvent(withLoading: withLoading));
+  }
+
+  // Filter products by category
+  callFilterByCategory(String category, {bool withLoading = true}) {
+    _productBloc.add(OnFilteredByCategoryEvent(
+        category: category, withLoading: withLoading));
   }
 }

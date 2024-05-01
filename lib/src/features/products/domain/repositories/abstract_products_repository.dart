@@ -5,4 +5,5 @@ import 'package:dartz/dartz.dart';
 abstract class AbstractProductRepository {
   Future<Either<Failure, List<ProductModel>>> getProducts();
   Future<Either<Failure, List<String>>> getCategories();
+  Future<Either<Failure, List<ProductModel>>> filterByCategory(String category);
 }

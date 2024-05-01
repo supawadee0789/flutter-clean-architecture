@@ -8,4 +8,8 @@ class AppApi {
   static String getCategoriesPath() {
     return '/products/categories';
   }
+
+  static String filterByCategory(String category) {
+    return '/products/category/$category';
+  }
 }
