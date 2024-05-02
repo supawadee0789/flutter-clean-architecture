@@ -18,6 +18,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       : super(LoadingGetProductsState()) {
     on<OnGettingProductsEvent>(_onGettingProducts);
     on<OnFilteredByCategoryEvent>(_onFilteredByCategory);
+    on<OnSearchEvent>(_onSearch);
   }
 
   _onGettingProducts(
@@ -52,5 +53,18 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         emit(ErrorGetProductsState(l.errorMessage));
       }
     }, (r) => emit(SuccessGetProductsState(r)));
+  }
+
+  _onSearch(OnSearchEvent event, Emitter<ProductsState> emit) async {
+    if (event.searchText.isNotEmpty) {
+      List<ProductModel> result = state.products
+          .where((element) => element.title!
+              .toLowerCase()
+              .contains(event.searchText.toLowerCase()))
+          .toList();
+      emit(SearchedProductState(result, state.products));
+    } else {
+      emit(SearchedProductState(state.products, state.products));
+    }
   }
 }

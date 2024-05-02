@@ -14,3 +14,8 @@ class OnFilteredByCategoryEvent extends ProductsEvent {
   final String category;
   OnFilteredByCategoryEvent({required this.category, this.withLoading = true});
 }
+
+class OnSearchEvent extends ProductsEvent {
+  final String searchText;
+  OnSearchEvent({required this.searchText});
+}

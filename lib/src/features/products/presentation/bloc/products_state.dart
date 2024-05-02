@@ -1,10 +1,11 @@
 part of 'products_bloc.dart';
 
 sealed class ProductsState extends Equatable {
-  const ProductsState();
+  final List<ProductModel> products;
+  const ProductsState({this.products = const []});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [products];
 }
 
 final class LoadingGetProductsState extends ProductsState {}
@@ -15,6 +16,15 @@ final class ErrorGetProductsState extends ProductsState {
 }
 
 final class SuccessGetProductsState extends ProductsState {
-  final List<ProductModel> products;
-  const SuccessGetProductsState(this.products);
+  const SuccessGetProductsState(List<ProductModel> products)
+      : super(products: products);
+}
+
+final class SearchedProductState extends ProductsState {
+  final List<ProductModel> filtered;
+  const SearchedProductState(this.filtered, List<ProductModel> allProducts)
+      : super(products: allProducts);
+
+  @override
+  List<Object> get props => [filtered, products];
 }

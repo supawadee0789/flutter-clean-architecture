@@ -62,7 +62,9 @@ class _ProductsPageState extends State<ProductsPage> {
             ),
           ),
           // Search sections
-          const SearchWidget(),
+          SearchWidget(
+            onChanged: callSearch,
+          ),
 
           // Products sections
           SizedBox(
@@ -74,10 +76,19 @@ class _ProductsPageState extends State<ProductsPage> {
                   return ProductsWidget(products: state.products);
                 }
 
+                if (state is SearchedProductState) {
+                  if (state.filtered.isEmpty) {
+                    return const Align(
+                        alignment: Alignment.topCenter,
+                        child: Text('Not found'));
+                  }
+                  return ProductsWidget(products: state.filtered);
+                }
+
                 if (state is ErrorGetProductsState) {
                   return RefreshWidget(
                     errorMsg: state.errorMsg,
-                    onRefresh: () => callProducts(),
+                    onRefresh: callProducts,
                   );
                 }
 
@@ -92,7 +103,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
   // Pages API
   // Get products
-  callProducts({bool withLoading = true}) {
+  void callProducts({bool withLoading = true}) {
     _productBloc.add(
       OnGettingProductsEvent(
         withLoading: withLoading,
@@ -101,13 +112,18 @@ class _ProductsPageState extends State<ProductsPage> {
   }
 
   // Get categories
-  callCategories({bool withLoading = true}) {
+  void callCategories({bool withLoading = true}) {
     _categoryBloc.add(OnGettingCategoryEvent(withLoading: withLoading));
   }
 
   // Filter products by category
-  callFilterByCategory(String category, {bool withLoading = true}) {
+  void callFilterByCategory(String category, {bool withLoading = true}) {
     _productBloc.add(OnFilteredByCategoryEvent(
         category: category, withLoading: withLoading));
+  }
+
+  // Search products
+  void callSearch(String value) {
+    _productBloc.add(OnSearchEvent(searchText: value));
   }
 }

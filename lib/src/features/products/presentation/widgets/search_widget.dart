@@ -1,14 +1,35 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchWidget extends StatefulWidget {
-  const SearchWidget({super.key});
+  final void Function(String) onChanged;
+  const SearchWidget({super.key, required this.onChanged});
 
   @override
   State<SearchWidget> createState() => _SearchWidgetState();
 }
 
 class _SearchWidgetState extends State<SearchWidget> {
+  Timer? typingTimer;
+
+  void handleInputChange(String value) {
+    if (typingTimer != null) {
+      typingTimer!.cancel();
+    }
+
+    typingTimer = Timer(const Duration(milliseconds: 1000), () {
+      widget.onChanged(value);
+    });
+  }
+
+  @override
+  void dispose() {
+    typingTimer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,6 +40,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
+        onChanged: handleInputChange,
         decoration: InputDecoration(
             border: const OutlineInputBorder(),
             contentPadding:
